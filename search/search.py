@@ -87,17 +87,82 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # print("Start:", problem.getStartState())
+    # print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    # print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+    # from game import Directions
+    from util import Stack
+    # n = Directions.NORTH
+    # s = Directions.SOUTH
+    # e = Directions.EAST
+    # w = Directions.WEST
+    
+    open = Stack()
+    closed = Stack()
+    open.push((problem.getStartState(), [], 0))
+    while not open.isEmpty():
+        x = open.pop()
+        if problem.isGoalState(x[0]):
+            # print(x[1])
+            return x[1]
+        elif not closed.list.__contains__(x[0]):
+            child = problem.getSuccessors(x[0])
+            closed.push(x[0])
+            for i in child:
+                if not open.list.__contains__(i) and not closed.list.__contains__(i[0]):
+                    open.push((i[0], x[1] + [i[1]], i[2]))
+    return False
+    # print(path)
+    # currentState = problem.getStartState()
+
+    # print("////////////////////",open.pop())
+    # return  [s, s, w, s, w, w, s, w]
+    #util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue
+    open = Queue()
+    closed = Queue()
+    open.push((problem.getStartState(), [], 0))
+    while not open.isEmpty():
+        x = open.pop()
+        if problem.isGoalState(x[0]):
+            # print(x[1])
+            return x[1]
+        elif not closed.list.__contains__(x[0]):
+            child = problem.getSuccessors(x[0])
+            closed.push(x[0])
+            for i in child:
+                if not open.list.__contains__(i) and not closed.list.__contains__(i[0]):
+                    open.push((i[0], x[1] + [i[1]], i[2]))
+    return False
+
+    # util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue, PriorityQueue
+    open = PriorityQueue()
+    closed = Queue()
+    open.push((problem.getStartState(), [], 0), 0)
+    while not open.isEmpty():
+        x = open.pop()
+        if problem.isGoalState(x[0]):
+            # print(x[1])
+            return x[1]
+        elif not closed.list.__contains__(x[0]):
+            child = problem.getSuccessors(x[0])
+            closed.push(x[0])
+            for i in child:
+                cost = x[2] + i[2]
+                if not closed.list.__contains__(i[0]):
+                    open.push((i[0], x[1] + [i[1]], cost), cost)
+    return False
+
+    # util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
     """
@@ -109,7 +174,25 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    from util import Queue, PriorityQueue
+    open = PriorityQueue()
+    closed = Queue()
+    open.push((problem.getStartState(), [], 0), heuristic(problem.getStartState(), problem))
+    while not open.isEmpty():
+        x = open.pop()
+        if problem.isGoalState(x[0]):
+            # print(x[1])
+            return x[1]
+        elif not closed.list.__contains__(x[0]):
+            child = problem.getSuccessors(x[0])
+            closed.push(x[0])
+            for i in child:
+                cost = x[2] + i[2]
+                if not closed.list.__contains__(i[0]):
+                    open.push((i[0], x[1] + [i[1]], cost), cost + heuristic(i[0], problem))
+    return False
+    
+    # util.raiseNotDefined()
 
 
 # Abbreviations
