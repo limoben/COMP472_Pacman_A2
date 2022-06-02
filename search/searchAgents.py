@@ -331,12 +331,12 @@ class CornersProblem(search.SearchProblem):
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
-            nextPosition = (nextx, nexty)
 
+            nextPosition = (nextx, nexty)
             cornerReached = [state[1][0], state[1][1], state[1][2], state[1][3]]
             if not hitsWall:
                 for i in range(4):
-                    if nextPosition == self.corners[i] and not cornerReached[i]:
+                    if (not cornerReached[i]) and nextPosition == self.corners[i]:
                         cornerReached[i] = True
                 nextState = (nextPosition, (cornerReached[0], cornerReached[1], cornerReached[2], cornerReached[3]))
                 successors.append((nextState, action, 1))

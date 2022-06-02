@@ -87,15 +87,7 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
-    # print("Start:", problem.getStartState())
-    # print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    # print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    # from game import Directions
     from util import Stack
-    # n = Directions.NORTH
-    # s = Directions.SOUTH
-    # e = Directions.EAST
-    # w = Directions.WEST
     
     open = Stack()
     closed = Stack()
@@ -103,7 +95,6 @@ def depthFirstSearch(problem):
     while not open.isEmpty():
         x = open.pop()
         if problem.isGoalState(x[0]):
-            # print(x[1])
             return x[1]
         elif not closed.list.__contains__(x[0]):
             child = problem.getSuccessors(x[0])
@@ -112,11 +103,6 @@ def depthFirstSearch(problem):
                 if not open.list.__contains__(i) and not closed.list.__contains__(i[0]):
                     open.push((i[0], x[1] + [i[1]], i[2]))
     return False
-    # print(path)
-    # currentState = problem.getStartState()
-
-    # print("////////////////////",open.pop())
-    # return  [s, s, w, s, w, w, s, w]
     #util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
@@ -129,7 +115,6 @@ def breadthFirstSearch(problem):
     while not open.isEmpty():
         x = open.pop()
         if problem.isGoalState(x[0]):
-            # print(x[1])
             return x[1]
         elif not closed.list.__contains__(x[0]):
             child = problem.getSuccessors(x[0])
@@ -151,7 +136,6 @@ def uniformCostSearch(problem):
     while not open.isEmpty():
         x = open.pop()
         if problem.isGoalState(x[0]):
-            # print(x[1])
             return x[1]
         elif not closed.list.__contains__(x[0]):
             child = problem.getSuccessors(x[0])
@@ -161,7 +145,6 @@ def uniformCostSearch(problem):
                 if not closed.list.__contains__(i[0]):
                     open.push((i[0], x[1] + [i[1]], cost), cost)
     return False
-
     # util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
@@ -181,7 +164,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     while not open.isEmpty():
         x = open.pop()
         if problem.isGoalState(x[0]):
-            # print(x[1])
             return x[1]
         elif not closed.list.__contains__(x[0]):
             child = problem.getSuccessors(x[0])
@@ -191,7 +173,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 if not closed.list.__contains__(i[0]):
                     open.push((i[0], x[1] + [i[1]], cost), cost + heuristic(i[0], problem))
     return False
-    
     # util.raiseNotDefined()
 
 
